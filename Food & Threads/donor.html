@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Page - Food n Threads</title>
+    <link rel="stylesheet" href="reciever.css">
+    <style>
+        /* Retain styling from receiver page */
+        .donor-page-container {
+            padding: 20px;
+        }
+        .product-upload {
+            margin-bottom: 20px;
+        }
+        .uploaded-products {
+            margin-top: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff4c7;
+            border-radius: 5px;
+        }
+        .product-card img {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="finallogo.png" alt="Logo">
+        </div>
+        <div class="app-name">
+            <h1>Food n Threads</h1>
+            <nav class="navigation">
+                <a href="menu.html">Home</a> |
+                <a href="#">About Us</a> |
+                <a href="login.html" class="logout">Log Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="donor-page-container">
+        <h2>Upload Product</h2>
+        <div class="product-upload">
+            <input type="file" id="product-image" required>
+            <input type="text" id="product-description" placeholder="Product Description" required>
+            <button onclick="uploadProduct()">Upload Product</button>
+        </div>
+
+        <h2>View Your Uploaded Products</h2>
+        <div class="uploaded-products" id="uploaded-products">
+            <!-- Dynamically show uploaded products here -->
+        </div>
+    </div>
+
+    <script>
+        // Check if the user is logged in
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            alert('Please log in to access this page');
+            window.location.href = 'login.html';
+        }
+
+        // Function to upload product
+        function uploadProduct() {
+            const productImage = document.getElementById('product-image').files[0];
+            const productDescription = document.getElementById('product-description').value;
+            if (!productImage || !productDescription) {
+                alert('Please fill in all details');
+                return;
+            }
+
+            const product = {
+                image: URL.createObjectURL(productImage),
+                description: productDescription,
+                user: loggedInUser,
+                status: 'Not Received'
+            };
+
+            // Save product to localStorage under logged-in user
+            const uploadedProducts = JSON.parse(localStorage.getItem(loggedInUser + '_products')) || [];
+            uploadedProducts=[];
+            uploadedProducts.push(product);
+            localStorage.setItem(loggedInUser + '_products', JSON.stringify(uploadedProducts));
+
+            alert('Product uploaded successfully!');
+            displayUploadedProducts();
+        }
+
+        // Function to display uploaded products
+        function displayUploadedProducts() {
+            const uploadedProducts = JSON.parse(localStorage.getItem(loggedInUser + '_products')) || [];
+            const uploadedProductsContainer = document.getElementById('uploaded-products');
+            uploadedProductsContainer.innerHTML = ''; // Clear previous list
+
+            if (uploadedProducts.length === 0) {
+                uploadedProductsContainer.innerHTML = '<p>No products uploaded yet.</p>';
+                return;
+            }
+
+            uploadedProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="Product Image">
+                    <p><strong>Description:</strong> ${product.description}</p>
+                    <p><strong>Status:</strong> ${product.status}</p>
+                `;
+                uploadedProductsContainer.appendChild(productCard);
+            });
+        }
+
+        // Display uploaded products when page loads
+        displayUploadedProducts();
+    </script>
+</body>
+</html>
+<style>
+    .logout {
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    font-size: 1.1em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+</style>

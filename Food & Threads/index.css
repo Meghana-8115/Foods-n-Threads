@@ -1,0 +1,79 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #fff4c7;
+    
+  }
+  .form-group{
+  width: 300px;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 5px solid gray;
+  margin-left: auto;
+  margin-right: auto;
+  
+  }
+  .container {
+    margin: 20px;
+  }
+  .slides {
+    display: none;
+  }
+  /*.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+  }
+    */
+
+
+  
+  .active {
+    display: block;
+  }
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  h2{
+    font-size: 80px;
+    color: black;
+    font-style: italic;
+    
+    
+  }
+  .form-group label {
+    display: block; 
+    margin-bottom: 8px;
+    
+}
+@font-face {
+    font-family: "Porcelain";
+    src: url("path/to/porcelain.woff2") format("woff2"), /* Modern browsers */
+         url("path/to/porcelain.woff") format("woff"),   /* Fallback */
+         url("path/to/porcelain.ttf") format("truetype"); /* Legacy browsers */
+}
+
+body {
+    font-family: "Porcelain", Arial, sans-serif; /* Apply the font globally */
+}
+
+h2 {
+    font-family: "Arial"; /* Apply only to specific elements */
+}
+
+/*.form-group input {
+     
+    padding: 10px;
+    border: 1px solid #ccc;
+
+}
+
+

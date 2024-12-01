@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food n Threads</title>
+    <link rel="stylesheet" href="reciever.css">
+    <style>
+        /* Product card styling */
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center; /* Center alignment for all content */
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            height: 150px;
+            width: 220px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .product-card .description {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center; /* Align description text to the center */
+        }
+        .product-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .product-card button:hover {
+            background-color: #0056b3;
+        }
+        .cart {
+            margin: 20px;
+            padding: 15px;
+            background-color: #f9f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cart h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .cart ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .cart ul li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="finallogo.png" alt="Logo">
+        </div>
+        <div class="app-name">
+            <h1>Food n Threads</h1>
+            <nav class="navigation">
+                <a href="menu.html">Home</a> |
+                <a href="#">About Us</a>
+                <a href="login.html" class="logout">Log Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img src="https://cdn.sanity.io/images/2r0kdewr/production/7a767ef62b756df20628101c041622b27d9ee0f6-1000x668.jpg" alt="Rice">
+            <div class="description">Rice</div>
+            <button onclick="addToCart('Rice')">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img src="https://assets.bonappetit.com/photos/5c62e4a3e81bbf522a9579ce/16:9/w_4000,h_2250,c_limit/milk-bread.jpg" alt="Bread">
+            <div class="description">Bread</div>
+            <button onclick="addToCart('Bread')">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="https://www.daringgourmet.com/wp-content/uploads/2013/06/Masoor-Dal-3-square-scaled.jpg" alt="Dal">
+            <div class="description">Dal</div>
+            <button onclick="addToCart('Dal')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://spicecravings.com/wp-content/uploads/2020/12/Roti-Featured-1.jpg" alt="Dal">
+            <div class="description">Roti</div>
+            <button onclick="addToCart('Dal')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://nutritionmeetsfoodscience.com/wp-content/uploads/2023/05/a4.png" alt="Dal">
+            <div class="description">Curd</div>
+            <button onclick="addToCart('Dal')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://i349.photobucket.com/albums/q371/d-k-photos/Main/sambar-sambhar-recipe22.jpg" alt="Dal">
+            <div class="description">Dal</div>
+            <button onclick="addToCart('Dal')">Add to Cart</button>
+        </div>
+    </main>
+
+    <!-- Cart Section -->
+    <div class="cart">
+        <h2>Cart</h2>
+        <ul id="cart-items">
+            <li>Your cart is empty</li>
+        </ul>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const cartItems = [];
+
+        function addToCart(item) {
+            // Add item to cart
+            cartItems.push(item);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-items');
+            cartList.innerHTML = ''; // Clear the cart
+
+            // Display items in cart
+            cartItems.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${item}`;
+                cartList.appendChild(listItem);
+            });
+
+            // Show a message if the cart is empty
+            if (cartItems.length === 0) {
+                const emptyMessage = document.createElement('li');
+                emptyMessage.textContent = 'Your cart is empty';
+                cartList.appendChild(emptyMessage);
+            }
+        }
+    </script>
+</body>
+</html>

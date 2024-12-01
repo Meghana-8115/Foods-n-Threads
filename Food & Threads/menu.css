@@ -1,0 +1,121 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f1e6;
+}
+
+/* Header Styles */
+header {
+    background-color: #ff7043;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.app-name h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.navigation {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.logout {
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    font-size: 1.1em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.logout:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+.categories {
+    display: inline-block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    margin: 0 20px;
+}
+
+.dropdown-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #fff4c7;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+/* Shipmate Button */
+.category-btn {
+    background-color: #fff4c7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.category-btn:hover {
+    background-color: #fff4c7;
+}

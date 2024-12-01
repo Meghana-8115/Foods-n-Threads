@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2 style="font-family:serif; color: #ff7043;">Food n Threads</h2>
+
+        <img src="finallogo.png" alt="Logo" class="top-left-image" width="100" height="100">
+ 
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+               
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-button">Sign in</button>
+        </form>
+        <a href="#" class="register-link" id="register-link">Don't have an account? Register</a>
+    </div>
+ 
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('login-form').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission from reloading the page
+   
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+   
+            const userData = { username, password };
+   
+            // Check if user exists in localStorage (simulating a backend)
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+   
+            const user = storedUsers.find(user => user.username === username && user.password === password);
+            if (user) {
+                // Store the logged-in user's username
+                localStorage.setItem('loggedInUser', username);
+
+                // Redirect to donor/receiver page after successful login
+                window.location.href = 'menu.html'; // This will navigate to menu.html
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+   
+        // Handle registration link click
+        document.getElementById('register-link').addEventListener('click', (event) => {
+            event.preventDefault();
+   
+            const username = prompt('Enter a username for registration:');
+            const password = prompt('Enter a password for registration:');
+   
+            if (username && password) {
+                const newUser = { username, password };
+   
+                // Get existing users from localStorage
+                const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+   
+                // Check if the user already exists
+                if (storedUsers.find(user => user.username === username)) {
+                    alert('Username already exists!');
+                    return;
+                }
+   
+                // Add new user to localStorage
+                storedUsers.push(newUser);
+                localStorage.setItem('users', JSON.stringify(storedUsers));
+   
+                alert('Registration successful! Please log in.');
+            } else {
+                alert('Registration canceled.');
+            }
+        });
+    </script>
+</body>
+</html>

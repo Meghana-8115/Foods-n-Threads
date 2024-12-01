@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Food n Threads</h2>
+        <img src="finallogo.png" alt="Logo" class="top-left-image" width="50" height="50">
+
+        <!-- Login Form -->
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-button" id="submit-button">Sign in</button>
+        </form>
+
+        <!-- Link to Toggle between Login and Register -->
+        <a href="#" class="register-link" id="toggle-link">Don't have an account? Register</a>
+    </div>
+
+    <script>
+        // Handle form submission (Login or Registration)
+        document.getElementById('login-form').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission from reloading the page
+    
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const isLoginMode = document.getElementById('submit-button').textContent === 'Sign in';
+
+            if (isLoginMode) {
+                // Login Logic
+                const user = users.find(user => user.username === username && user.password === password);
+                if (user) {
+                    window.location.href = 'index.html'; // Redirect to index.html after successful login
+                } else {
+                    alert('Invalid username or password');
+                }
+            } else {
+                // Registration Logic
+                // Check if username already exists
+                if (users.find(user => user.username === username)) {
+                    alert('Username already exists!');
+                } else {
+                    // Register new user
+                    users.push({ username, password });
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Registration successful! Please log in.');
+                    toggleForm('login'); // Switch back to login form
+                }
+            }
+        });
+    
+        // Handle the toggle between Login and Register Form
+        document.getElementById('toggle-link').addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+    
+            const currentMode = document.getElementById('submit-button').textContent === 'Sign in' ? 'login' : 'register';
+            const newMode = currentMode === 'login' ? 'register' : 'login';
+
+            toggleForm(newMode);
+        });
+
+        // Function to toggle between Login and Register mode
+        function toggleForm(mode) {
+            if (mode === 'register') {
+                document.getElementById('submit-button').textContent = 'Register'; // Change button text to 'Register'
+                document.getElementById('toggle-link').textContent = 'Already have an account? Login'; // Change link text to 'Login'
+            } else {
+                document.getElementById('submit-button').textContent = 'Sign in'; // Change button text to 'Sign in'
+                document.getElementById('toggle-link').textContent = "Don't have an account? Register"; // Change link text to 'Register'
+            }
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food n Threads</title>
+    <link rel="stylesheet" href="reciever.css">
+    <style>
+        /* Product card styling */
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .product-card {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            height: 150px;
+            width: 220px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .product-card .description {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .product-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .product-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="finallogo.png" alt="Logo">
+        </div>
+        <div class="app-name">
+            <h1>Food n Threads</h1>
+            <nav class="navigation">
+                <a href="menu.html">Home</a> |
+                <a href="#">About Us</a>
+                <a href="login.html" class="logout">Log Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main id="products-container">
+        <!-- Product cards will be dynamically added here -->
+    </main>
+
+    <script>
+        // Load products from localStorage and display them
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+
+        // Function to create and display product cards
+        function displayProducts() {
+            const mainContent = document.getElementById('products-container');
+            if (products.length === 0) {
+                mainContent.innerHTML = '<p>No products available</p>';
+                return;
+            }
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+
+                const productImage = document.createElement('img');
+                productImage.src = product.imageUrl;
+                productImage.alt = product.name;
+
+                const descriptionDiv = document.createElement('div');
+                descriptionDiv.classList.add('description');
+                descriptionDiv.textContent = product.description;
+
+                const addButton = document.createElement('button');
+                addButton.textContent = 'Add to Cart';
+                addButton.onclick = function() { addToCart(product.name); };
+
+                productCard.appendChild(productImage);
+                productCard.appendChild(descriptionDiv);
+                productCard.appendChild(addButton);
+
+                mainContent.appendChild(productCard);
+            });
+        }
+
+        function addToCart(item) {
+            cartItems.push(item);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-items');
+            cartList.innerHTML = ''; // Clear the cart
+
+            cartItems.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${item}`;
+                cartList.appendChild(listItem);
+            });
+
+            if (cartItems.length === 0) {
+                const emptyMessage = document.createElement('li');
+                emptyMessage.textContent = 'Your cart is empty';
+                cartList.appendChild(emptyMessage);
+            }
+        }
+
+        // Display the products on page load
+        displayProducts();
+    </script>
+</body>
+</html>
