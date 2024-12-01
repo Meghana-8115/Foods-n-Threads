@@ -38,5 +38,4 @@ Food n Threads is a user-friendly web application designed to connect donors and
 
 ---
 
-## **Project Structure**
 
